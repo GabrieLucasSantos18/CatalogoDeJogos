@@ -33,7 +33,7 @@ CREATE TABLE jogo (
   preco decimal(4,2) NOT NULL, 
   tamanho bigint(20) NOT NULL, 
   classificacao tinyint(2) NOT NULL, 
-  avaliacao varchar(10) NOT NULL, 
+  avaliacao varchar(30) NOT NULL, 
   data_lancamento datetime NOT NULL DEFAULT current_timestamp(), 
   desenvolvedora varchar(35) NOT NULL, 
   plataforma text NOT NULL 
