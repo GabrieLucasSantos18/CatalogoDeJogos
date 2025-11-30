@@ -17,8 +17,8 @@ var connectionString = builder.Configuration.GetConnectionString("DefaultConnect
 
 // 2. Avisa o projeto para usar MySQL com o contexto que foi gerado
 builder.Services.AddDbContext<CatalogoJogosContext>(options =>
-    options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString));
-    mySqlOptions => mySqlOptions.EnableRetryOnFailure());
+    options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString),
+    mySqlOptions => mySqlOptions.EnableRetryOnFailure()));
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
