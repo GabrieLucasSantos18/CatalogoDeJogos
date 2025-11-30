@@ -2,16 +2,14 @@ version: "3.8"
 
 services:
   db:
-    image: mariadb:10.4
-    container_name: catalogo_db
-    restart: unless-stopped
+    image: mysql:8
+    container_name: mysql_db
+    restart: always
     environment:
-      - MARIADB_ROOT_PASSWORD=Your_root_Password123   
-      - MARIADB_DATABASE=catalogo_jogos
+      MYSQL_ROOT_PASSWORD: 123
+      MYSQL_DATABASE: catalogo_jogos
     volumes:
-      - ./database/catalogo_jogos_dump.sql:/docker-entrypoint-initdb.d/init.sql:ro
-    ports:
-      - "3306:3306"
+      - ./database/catalogo_jogos_dump.sql:/docker-entrypoint-initdb.d/dump.sql
 
   api:
     build: .                   
@@ -20,7 +18,7 @@ services:
       - db
     environment:
       - ASPNETCORE_URLS=http://0.0.0.0:8080
-      - ConnectionStrings__Default=Server=db;Port=3306;Database=catalogo_jogos;Uid=root;Pwd=Your_root_Password123;
+      - ConnectionStrings__DefaultConnection=Server=db;Database=catalogo_jogos;Uid=root;Pwd=123;
     ports:
       - "8080:8080"
     restart: unless-stopped
