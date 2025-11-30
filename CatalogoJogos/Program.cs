@@ -12,12 +12,13 @@ builder.Services.AddControllers()
         options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
     });
 
-// 1. Pega a senha/endereço do banco no arquivo appsettings.json
+// 1. Pega a senha/endereÃ§o do banco no arquivo appsettings.json
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 
 // 2. Avisa o projeto para usar MySQL com o contexto que foi gerado
 builder.Services.AddDbContext<CatalogoJogosContext>(options =>
     options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
+    mySqlOptions => mySqlOptions.EnableRetryOnFailure()));
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -30,7 +31,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.UseHttpsRedirection();
+// app.UseHttpsRedirection();
 
 app.UseAuthorization();
 
