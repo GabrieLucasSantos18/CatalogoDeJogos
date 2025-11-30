@@ -25,9 +25,6 @@ public partial class CatalogoJogosContext : DbContext
 
     public virtual DbSet<Jogopc> Jogopcs { get; set; }
 
-    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        => optionsBuilder.UseMySql("server=localhost;user=root;database=catalogo_jogos", Microsoft.EntityFrameworkCore.ServerVersion.Parse("10.4.32-mariadb"));
-
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder
