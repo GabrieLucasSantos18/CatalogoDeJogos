@@ -1,24 +1,26 @@
-version: "3.8"
-
 services:
   db:
     image: mysql:8
-    container_name: mysql_db
+    container_name: mysql8
     restart: always
     environment:
       MYSQL_ROOT_PASSWORD: 123
       MYSQL_DATABASE: catalogo_jogos
+    ports:
+      - "3306:3306"
     volumes:
-      - ./database/catalogo_jogos_dump.sql:/docker-entrypoint-initdb.d/dump.sql
+      - ./database/catalogo_jogos_dump.sql:/docker-entrypoint-initdb.d/init.sql:ro
 
   api:
-    build: .                   
+    image: mcr.microsoft.com/dotnet/sdk:8.0
     container_name: catalogo_api
     depends_on:
       - db
+    working_dir: /app
+    volumes:
+      - ./:/app
+    command: bash -c "dotnet publish -c Release -f net8.0 -r linux-x64 --self-contained true -o out && ASPNETCORE_URLS=http://0.0.0.0:8080 ./out/CatalogoJogos"
     environment:
-      - ASPNETCORE_URLS=http://0.0.0.0:8080
-      - ConnectionStrings__DefaultConnection=server=db;user=root;password=123;database=catalogo_jogos;
+      ConnectionStrings__DefaultConnection: "server=db;user=root;password=123;database=catalogo_jogos"
     ports:
       - "8080:8080"
-    restart: unless-stopped
