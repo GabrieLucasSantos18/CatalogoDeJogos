@@ -1,0 +1,26 @@
+version: "3.8"
+
+services:
+  db:
+    image: mariadb:10.4
+    container_name: catalogo_db
+    restart: unless-stopped
+    environment:
+      - MARIADB_ROOT_PASSWORD=Your_root_Password123   
+      - MARIADB_DATABASE=catalogo_jogos
+    volumes:
+      - ./database/catalogo_jogos_dump.sql:/docker-entrypoint-initdb.d/init.sql:ro
+    ports:
+      - "3306:3306"
+
+  api:
+    build: .                   
+    container_name: catalogo_api
+    depends_on:
+      - db
+    environment:
+      - ASPNETCORE_URLS=http://0.0.0.0:8080
+      - ConnectionStrings__Default=Server=db;Port=3306;Database=catalogo_jogos;Uid=root;Pwd=Your_root_Password123;
+    ports:
+      - "8080:8080"
+    restart: unless-stopped
