@@ -30,7 +30,7 @@ CREATE TABLE jogo (
   titulo varchar(150) NOT NULL, 
   descricao text NOT NULL, 
   genero varchar(40) NOT NULL, 
-  preco decimal(4,2) NOT NULL, 
+  preco decimal(6,2) NOT NULL, 
   tamanho bigint(20) NOT NULL, 
   classificacao tinyint(2) NOT NULL, 
   avaliacao varchar(30) NOT NULL, 
@@ -171,3 +171,75 @@ REFERENCES jogo (ID_jogo);
 ALTER TABLE jogopc 
   ADD CONSTRAINT fkpc_ID_jogo FOREIGN KEY (ID_jogo) 
 REFERENCES jogo (ID_jogo); COMMIT;
+
+--
+-- Inserções para tabelas jogopc
+--
+
+INSERT INTO jogo (ID_jogo, titulo, descricao, genero, preco, tamanho, classificacao, avaliacao, data_lancamento, desenvolvedora, plataforma)
+VALUES (1, 'Cyberpunk 2077', 'RPG futurista mundo aberto', 'RPG', 199.90, 70000, 18, '9.0', NOW(), 'CD Projekt Red', 'PC');
+
+INSERT INTO jogopc (ID_jogo, requisitos_minimos, requisitos_recomendados)
+VALUES (1, 'i5 / GTX 960 / 8GB RAM', 'i7 / RTX 2060 / 16GB RAM');
+
+
+INSERT INTO jogo (ID_jogo, titulo, descricao, genero, preco, tamanho, classificacao, avaliacao, data_lancamento, desenvolvedora, plataforma)
+VALUES (2, 'Valorant', 'FPS tático 5v5', 'FPS', 0.00, 30000, 14, '8.8', NOW(), 'Riot Games', 'PC');
+
+INSERT INTO jogopc (ID_jogo, requisitos_minimos, requisitos_recomendados)
+VALUES (2, 'i3 / GT 730 / 4GB RAM', 'i5 / GTX 1050 / 8GB RAM');
+
+
+INSERT INTO jogo (ID_jogo, titulo, descricao, genero, preco, tamanho, classificacao, avaliacao, data_lancamento, desenvolvedora, plataforma)
+VALUES (3, 'Microsoft Flight Simulator', 'Simulação realista de aviação', 'Simulação', 249.99, 120000, 12, '9.5', NOW(), 'Microsoft', 'PC');
+
+INSERT INTO jogopc (ID_jogo, requisitos_minimos, requisitos_recomendados)
+VALUES (3, 'i5 / GTX 770 / 8GB RAM', 'i7 / RTX 2080 / 32GB RAM');
+
+--
+-- Inserções para tabelas jogoconsole
+--
+
+INSERT INTO jogo (ID_jogo, titulo, descricao, genero, preco, tamanho, classificacao, avaliacao, data_lancamento, desenvolvedora, plataforma)
+VALUES (4, 'God of War Ragnarok', 'Jornada de Kratos e Atreus', 'Ação', 299.99, 90000, 18, '9.8', NOW(), 'Santa Monica Studio', 'Console');
+
+INSERT INTO jogoconsole (ID_jogo, console_especifico, suporte_multiplayer)
+VALUES (4, 'PlayStation 5', 0);
+
+
+INSERT INTO jogo (ID_jogo, titulo, descricao, genero, preco, tamanho, classificacao, avaliacao, data_lancamento, desenvolvedora, plataforma)
+VALUES (5, 'Halo Infinite', 'Campanha e multiplayer futurista', 'FPS', 259.99, 80000, 16, '8.9', NOW(), '343 Industries', 'Console');
+
+INSERT INTO jogoconsole (ID_jogo, console_especifico, suporte_multiplayer)
+VALUES (5, 'Xbox Series X', 1);
+
+
+INSERT INTO jogo (ID_jogo, titulo, descricao, genero, preco, tamanho, classificacao, avaliacao, data_lancamento, desenvolvedora, plataforma)
+VALUES (6, 'Mario Kart 8 Deluxe', 'Corridas com personagens Nintendo', 'Corrida', 249.99, 5000, 3, '9.2', NOW(), 'Nintendo', 'Console');
+
+INSERT INTO jogoconsole (ID_jogo, console_especifico, suporte_multiplayer)
+VALUES (6, 'Nintendo Switch', 1);
+
+--
+-- Inserções para tabelas jogomobile
+--
+
+INSERT INTO jogo (ID_jogo, titulo, descricao, genero, preco, tamanho, classificacao, avaliacao, data_lancamento, desenvolvedora, plataforma)
+VALUES (7, 'Clash Royale', 'Batalhas PvP em tempo real', 'Estratégia', 0.00, 250, 10, '8.5', NOW(), 'Supercell', 'Mobile');
+
+INSERT INTO jogomobile (ID_jogo, precisa_conexao)
+VALUES (7, 1);
+
+
+INSERT INTO jogo (ID_jogo, titulo, descricao, genero, preco, tamanho, classificacao, avaliacao, data_lancamento, desenvolvedora, plataforma)
+VALUES (8, 'Minecraft Pocket Edition', 'Sobrevivência e construção', 'Aventura', 29.90, 300, 7, '9.4', NOW(), 'Mojang', 'Mobile');
+
+INSERT INTO jogomobile (ID_jogo, precisa_conexao)
+VALUES (8, 0);
+
+
+INSERT INTO jogo (ID_jogo, titulo, descricao, genero, preco, tamanho, classificacao, avaliacao, data_lancamento, desenvolvedora, plataforma)
+VALUES (9, 'PUBG Mobile', 'Battle Royale 100 jogadores', 'FPS', 0.00, 2200, 16, '8.9', NOW(), 'Tencent', 'Mobile');
+
+INSERT INTO jogomobile (ID_jogo, precisa_conexao)
+VALUES (9, 1);
