@@ -1,8 +1,7 @@
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 WORKDIR /src
 
-COPY CatalogoJogos. csproj
-
+COPY CatalogoJogos.csproj ./
 RUN dotnet restore "./CatalogoJogos.csproj"
 
 COPY . .
