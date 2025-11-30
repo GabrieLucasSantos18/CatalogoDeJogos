@@ -1,3 +1,5 @@
+version: "3.9"
+
 services:
   db:
     image: mysql:8
@@ -8,9 +10,14 @@ services:
       MYSQL_DATABASE: catalogo_jogos
     ports:
       - "3306:3306"
-    volumes:
+    volumes :
       - ./database/catalogo_jogos_dump.sql:/docker-entrypoint-initdb.d/init.sql:ro
-
+    healthcheck:
+      test: ["CMD-SHELL", "mysqladmin ping -h localhost -p$MYSQL_ROOT_PASSWORD || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
   api:
     build: .
     container_name: catalogo_api
@@ -18,5 +25,8 @@ services:
       - db
     environment:
       ConnectionStrings__DefaultConnection: "server=db;user=root;password=123;database=catalogo_jogos"
+      ASPNETCORE_URLS: "http://+:8181"
+      ASPNETCORE_ENVIRONMENT: "Development"
     ports:
-      - "8080:8080"
+      - "8181:8181"
+    restart: on-failure
